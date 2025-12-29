@@ -1,0 +1,48 @@
+
+import React, { useState, useCallback } from 'react';
+import HomeScreen from './components/HomeScreen';
+import DownPaymentEstimator from './components/DownPaymentEstimator';
+import InvestmentRoiCalculator from './components/InvestmentRoiCalculator';
+
+type View = 'home' | 'downPayment' | 'roi';
+
+const App: React.FC = () => {
+  const [view, setView] = useState<View>('home');
+
+  const navigateTo = useCallback((newView: View) => {
+    setView(newView);
+    window.scrollTo(0, 0);
+  }, []);
+
+  const renderView = () => {
+    switch (view) {
+      case 'downPayment':
+        return <DownPaymentEstimator onBack={() => navigateTo('home')} />;
+      case 'roi':
+        return <InvestmentRoiCalculator onBack={() => navigateTo('home')} />;
+      case 'home':
+      default:
+        return <HomeScreen onSelect={navigateTo} />;
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-navy-start to-navy-end text-white font-sans">
+      <header className="bg-white/10 backdrop-blur-md sticky top-0 z-10 border-b border-white/20">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16">
+            <h1 className="text-xl md:text-2xl font-bold tracking-tight">Dallas Home Calculator Suite</h1>
+          </div>
+        </div>
+      </header>
+      <main className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {renderView()}
+      </main>
+      <footer className="text-center py-4 text-gray-400 text-sm">
+        <p>&copy; 2024 Dallas Home Calculator Suite. All rights reserved.</p>
+      </footer>
+    </div>
+  );
+};
+
+export default App;
