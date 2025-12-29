@@ -11,9 +11,9 @@ const Button: React.FC<ButtonProps> = ({ children, variant = 'primary', leftIcon
   const baseClasses = 'inline-flex items-center justify-center rounded-md text-sm font-semibold focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 px-4 py-2';
 
   const variantClasses = {
-    primary: 'bg-blue-600 text-white hover:bg-blue-700 focus-visible:ring-blue-500',
-    secondary: 'bg-white/10 text-white hover:bg-white/20 border border-white/20 focus-visible:ring-white',
-    ghost: 'text-gray-300 hover:bg-white/10 hover:text-white',
+    primary: 'bg-brand-violet text-white hover:opacity-90 focus-visible:ring-brand-violet',
+    secondary: 'bg-brand-violet/10 text-brand-violet hover:bg-brand-violet/20 border border-transparent focus-visible:ring-brand-violet',
+    ghost: 'text-gray-700 hover:bg-gray-200 hover:text-gray-900',
   };
 
   return (

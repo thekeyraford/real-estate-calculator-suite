@@ -1,3 +1,4 @@
+
 import React, { useState, useMemo, useCallback, useEffect } from 'react';
 import Card from './ui/Card';
 import Input from './ui/Input';
@@ -200,7 +201,7 @@ Total Monthly: ${formatCurrency(results.totalMonthly)}` : ''}
           <Input label="Home Price" id="homePrice" name="homePrice" value={inputs.homePrice} onChange={handleChange} error={errors.homePrice} type="text" inputMode="decimal" leadingAddon="$"/>
           
           <div>
-            <label className="block text-sm font-medium text-gray-300 mb-1">Down Payment</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Down Payment</label>
             <div className="grid grid-cols-2 gap-2">
               <Toggle value={inputs.dpMode} onChange={(v) => setInputs(p => ({...p, dpMode: v}))} options={[{value: InputMode.Percent, label: '%'}, {value: InputMode.Dollar, label: '$'}]} />
               <Input label="" id="dpValue" name="dpValue" value={inputs.dpValue} onChange={handleChange} error={errors.dpValue} type="text" inputMode="decimal" />
@@ -210,29 +211,29 @@ Total Monthly: ${formatCurrency(results.totalMonthly)}` : ''}
           <Select label="Loan Type" id="loanType" name="loanType" value={inputs.loanType} onChange={handleLoanTypeChange}>
             {Object.values(LoanType).map(t => <option key={t}>{t}</option>)}
           </Select>
-          {inputs.loanType === LoanType.VA && <p className="text-xs text-blue-300">VA loans may not require a down payment for eligible veterans. Check with your lender.</p>}
+          {inputs.loanType === LoanType.VA && <p className="text-xs text-brand-violet">VA loans may not require a down payment for eligible veterans. Check with your lender.</p>}
 
           <div>
-            <label className="block text-sm font-medium text-gray-300 mb-1">Closing Costs</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Closing Costs</label>
             <div className="grid grid-cols-2 gap-2">
               <Toggle value={inputs.ccMode} onChange={(v) => setInputs(p => ({...p, ccMode: v}))} options={[{value: InputMode.Percent, label: '%'}, {value: InputMode.Dollar, label: '$'}]} />
               <Input label="" id="ccValue" name="ccValue" value={inputs.ccValue} onChange={handleChange} error={errors.ccValue} type="text" inputMode="decimal" />
             </div>
           </div>
 
-          <div className="border-t border-white/20 pt-4">
+          <div className="border-t border-gray-200 pt-4">
              <Checkbox label="Estimate Monthly Payment" id="estimateMonthly" name="estimateMonthly" checked={inputs.estimateMonthly} onChange={handleChange} />
           </div>
 
           {inputs.estimateMonthly && (
-            <div className="space-y-4 pt-4 border-t border-white/20">
+            <div className="space-y-4 pt-4 border-t border-gray-200">
                 <Input label="Interest Rate (APR)" id="interestRate" name="interestRate" value={inputs.interestRate} onChange={handleChange} error={errors.interestRate} type="text" inputMode="decimal" leadingAddon="%"/>
                 <div>
-                    <label className="block text-sm font-medium text-gray-300 mb-1">Loan Term</label>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Loan Term</label>
                     <Toggle value={String(inputs.loanTerm) as any} onChange={(v) => setInputs(p => ({...p, loanTerm: Number(v) as LoanTerm}))} options={[{value: String(LoanTerm.Thirty), label: '30 Year'}, {value: String(LoanTerm.Fifteen), label: '15 Year'}]} />
                 </div>
                 <div>
-                    <label className="block text-sm font-medium text-gray-300 mb-1">Property Tax</label>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Property Tax</label>
                     <div className="grid grid-cols-2 gap-2">
                     <Toggle value={inputs.taxMode} onChange={(v) => setInputs(p => ({...p, taxMode: v}))} options={[{value: InputMode.Percent, label: '% Price'}, {value: InputMode.Dollar, label: '$/Year'}]} />
                     <Input label="" id="taxValue" name="taxValue" value={inputs.taxValue} onChange={handleChange} error={errors.taxValue} type="text" inputMode="decimal" />
@@ -246,27 +247,27 @@ Total Monthly: ${formatCurrency(results.totalMonthly)}` : ''}
 
         {/* Outputs */}
         <Card className="p-6 space-y-4 h-fit">
-          <h3 className="text-xl font-bold border-b border-white/20 pb-2">Estimated Costs</h3>
+          <h3 className="text-xl font-bold border-b border-gray-200 pb-2">Estimated Costs</h3>
           <div className="space-y-2 text-lg">
             <div className="flex justify-between"><span>Down Payment:</span> <strong>{formatCurrency(results.downPaymentAmount)}</strong></div>
             <div className="flex justify-between"><span>Loan Amount:</span> <strong>{formatCurrency(results.loanAmount)}</strong></div>
             <div className="flex justify-between"><span>Closing Costs:</span> <strong>{formatCurrency(results.closingCosts)}</strong></div>
-            <div className="flex justify-between text-2xl font-bold pt-2 border-t border-white/20 text-blue-300"><span>Cash to Close:</span> <span>{formatCurrency(results.cashToClose)}</span></div>
+            <div className="flex justify-between text-2xl font-bold pt-2 border-t border-gray-200 text-brand-violet"><span>Cash to Close:</span> <span>{formatCurrency(results.cashToClose)}</span></div>
           </div>
 
           {inputs.estimateMonthly && (
-            <div className="pt-4 border-t border-white/20">
-                 <h3 className="text-xl font-bold border-b border-white/20 pb-2 mb-2">Estimated Monthly Payment</h3>
+            <div className="pt-4 border-t border-gray-200">
+                 <h3 className="text-xl font-bold border-b border-gray-200 pb-2 mb-2">Estimated Monthly Payment</h3>
                  <div className="space-y-2 text-lg">
                     <div className="flex justify-between"><span>Principal & Interest:</span> <strong>{formatCurrency(results.pAndI)}</strong></div>
                     <div className="flex justify-between"><span>Taxes:</span> <strong>{formatCurrency(results.monthlyTaxes)}</strong></div>
                     <div className="flex justify-between"><span>Insurance:</span> <strong>{formatCurrency(parseNumber(inputs.insurance))}</strong></div>
                     <div className="flex justify-between"><span>HOA:</span> <strong>{formatCurrency(parseNumber(inputs.hoa))}</strong></div>
-                    <div className="flex justify-between text-2xl font-bold pt-2 border-t border-white/20 text-blue-300"><span>Total Monthly:</span> <span>{formatCurrency(results.totalMonthly)}</span></div>
+                    <div className="flex justify-between text-2xl font-bold pt-2 border-t border-gray-200 text-brand-violet"><span>Total Monthly:</span> <span>{formatCurrency(results.totalMonthly)}</span></div>
                  </div>
             </div>
           )}
-          <div className="flex flex-wrap gap-2 pt-4 border-t border-white/20">
+          <div className="flex flex-wrap gap-2 pt-4 border-t border-gray-200">
               <Button onClick={handleReset} variant="secondary" leftIcon={<ResetIcon />}>Reset</Button>
               <Button onClick={handleCopy} variant="secondary" leftIcon={<CopyIcon />}>{copySuccess || 'Copy Summary'}</Button>
               <Button onClick={handleAnalyze} disabled={isAnalyzing || Object.keys(errors).length > 0} leftIcon={<SparkleIcon />}>Analyze with Gemini</Button>

@@ -1,3 +1,4 @@
+
 import React, { useState, useMemo, useCallback, useEffect } from 'react';
 import Card from './ui/Card';
 import Input from './ui/Input';
@@ -233,7 +234,7 @@ Cap Rate: ${formatPercent(results.capRate)}
 
     const renderSection = (title: string, children: React.ReactNode) => (
         <div className="space-y-4">
-            <h3 className="text-lg font-semibold border-b border-white/20 pb-2">{title}</h3>
+            <h3 className="text-lg font-semibold border-b border-gray-200 pb-2">{title}</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {children}
             </div>
@@ -255,11 +256,11 @@ Cap Rate: ${formatPercent(results.capRate)}
                             <Input label="Down Payment" name="downPaymentPercent" value={inputs.downPaymentPercent} onChange={handleChange} error={errors.downPaymentPercent} type="number" leadingAddon="%" />
                             <Input label="Interest Rate (APR)" name="interestRate" value={inputs.interestRate} onChange={handleChange} error={errors.interestRate} type="number" leadingAddon="%" />
                             <div>
-                                <label className="block text-sm font-medium text-gray-300 mb-1">Loan Term</label>
+                                <label className="block text-sm font-medium text-gray-700 mb-1">Loan Term</label>
                                 <Toggle value={String(inputs.loanTerm) as any} onChange={(v) => setInputs(p => ({...p, loanTerm: Number(v) as LoanTerm}))} options={[{value: String(LoanTerm.Thirty), label: '30 Year'}, {value: String(LoanTerm.Fifteen), label: '15 Year'}]} />
                             </div>
                             <div>
-                                <label className="block text-sm font-medium text-gray-300 mb-1">Closing Costs</label>
+                                <label className="block text-sm font-medium text-gray-700 mb-1">Closing Costs</label>
                                 <div className="grid grid-cols-2 gap-2">
                                 <Toggle value={inputs.ccMode} onChange={(v) => setInputs(p => ({...p, ccMode: v}))} options={[{value: InputMode.Percent, label: '%'}, {value: InputMode.Dollar, label: '$'}]} />
                                 <Input label="" name="ccValue" value={inputs.ccValue} onChange={handleChange} error={errors.ccValue} type="number" />
@@ -274,35 +275,35 @@ Cap Rate: ${formatPercent(results.capRate)}
                           <Input label="Property Address (Optional)" name="propertyAddress" value={inputs.propertyAddress} onChange={handleChange} />
                           
                           <div>
-                            <h4 className="text-md font-semibold text-gray-300 mb-2">Monthly Income</h4>
+                            <h4 className="text-md font-semibold text-gray-700 mb-2">Monthly Income</h4>
                             <Input label="Gross Rent" name="monthlyRent" value={inputs.monthlyRent} onChange={handleChange} error={errors.monthlyRent} type="number" leadingAddon="$" />
                           </div>
                           
                           <div>
-                            <h4 className="text-md font-semibold text-gray-300 mb-2">Monthly Expenses</h4>
+                            <h4 className="text-md font-semibold text-gray-700 mb-2">Monthly Expenses</h4>
                             <div className="space-y-3">
                                <div>
                                   <Input label="Repairs & Maintenance" name="repairsMaintenance" value={inputs.repairsMaintenance} onChange={handleChange} error={errors.repairsMaintenance} type="number" leadingAddon="$" />
-                                  <p className="mt-1 text-xs text-gray-400">Actual or estimate (e.g., 1% of home value annually, divided by 12)</p>
+                                  <p className="mt-1 text-xs text-gray-500">Actual or estimate (e.g., 1% of home value annually, divided by 12)</p>
                                </div>
                                <div>
                                   <Input label="Property Taxes" value={assetCalculations.monthlyTaxes.toFixed(2)} onChange={e => handleAssetChange('taxValue', e.target.value, true)} type="number" leadingAddon="$" />
-                                  <p className="mt-1 text-xs text-gray-400">Actual or estimate = FMV × 0.004</p>
+                                  <p className="mt-1 text-xs text-gray-500">Actual or estimate = FMV × 0.004</p>
                                </div>
                                <div>
                                   {/* FIX: Corrected the function call from 'handleAsset' to 'handleAssetChange' and completed it. */}
                                   <Input label="Insurance" value={assetCalculations.monthlyInsurance.toFixed(2)} onChange={e => handleAssetChange('insurance', e.target.value, true)} type="number" leadingAddon="$" />
-                                  <p className="mt-1 text-xs text-gray-400">Actual or estimate</p>
+                                  <p className="mt-1 text-xs text-gray-500">Actual or estimate</p>
                                </div>
                                <div>
                                   <Input label="Property Management" value={assetCalculations.propMgmtFee.toFixed(2)} onChange={e => handlePropMgmtAssetChange(e.target.value)} type="number" leadingAddon="$" />
-                                  <p className="mt-1 text-xs text-gray-400">Based on % of Gross Rent</p>
+                                  <p className="mt-1 text-xs text-gray-500">Based on % of Gross Rent</p>
                                </div>
                                <Input label="HOA" name="hoa" value={inputs.hoa} onChange={handleChange} error={errors.hoa} type="number" leadingAddon="$" />
                             </div>
                           </div>
-                          <div className="mt-4 pt-4 border-t border-white/20">
-                            <h4 className="text-md font-semibold text-gray-300 mb-2">Performance Metrics</h4>
+                          <div className="mt-4 pt-4 border-t border-gray-200">
+                            <h4 className="text-md font-semibold text-gray-700 mb-2">Performance Metrics</h4>
                             <div className="space-y-2">
                               <div className="flex justify-between"><span>Monthly NOI:</span> <strong>{formatCurrency(assetTestResults.noi)}</strong></div>
                               <div className="flex justify-between"><span>Cap Rate:</span> <strong>{formatPercent(assetTestResults.capRate)}</strong></div>
@@ -330,38 +331,38 @@ Cap Rate: ${formatPercent(results.capRate)}
                 {/* Outputs */}
                 <div className="lg:col-span-1 space-y-6">
                     <Card className="p-6 space-y-4 h-fit sticky top-24">
-                        <h3 className="text-xl font-bold border-b border-white/20 pb-2">Key Return Metrics</h3>
+                        <h3 className="text-xl font-bold border-b border-gray-200 pb-2">Key Return Metrics</h3>
                         <div className="space-y-3">
                             <div className="flex justify-between items-center">
                                 <span className="text-lg">Cash on Cash Return:</span>
-                                <strong className="text-3xl font-bold text-blue-300">{formatPercent(results.cashOnCashReturn)}</strong>
+                                <strong className="text-3xl font-bold text-brand-violet">{formatPercent(results.cashOnCashReturn)}</strong>
                             </div>
                              <div className="flex justify-between items-center">
                                 <span className="text-lg">Cap Rate:</span>
-                                <strong className="text-3xl font-bold text-blue-300">{formatPercent(results.capRate)}</strong>
+                                <strong className="text-3xl font-bold text-brand-violet">{formatPercent(results.capRate)}</strong>
                             </div>
-                            <div className="flex justify-between items-center pt-2 border-t border-white/20">
+                            <div className="flex justify-between items-center pt-2 border-t border-gray-200">
                                 <span className="text-lg">Monthly Cash Flow:</span>
-                                <strong className="text-2xl font-bold text-green-400">{formatCurrency(results.cashFlowMonthly)}</strong>
+                                <strong className="text-2xl font-bold text-green-600">{formatCurrency(results.cashFlowMonthly)}</strong>
                             </div>
                         </div>
 
                         <Accordion title="View Detailed Breakdown" startOpen={false}>
                             <div className="space-y-2 text-sm">
                                 <div className="flex justify-between"><span>Total Cash Invested:</span> <strong>{formatCurrency(results.totalCashInvested)}</strong></div>
-                                <hr className="border-white/10 my-1"/>
+                                <hr className="border-gray-200 my-1"/>
                                 <div className="flex justify-between"><span>Effective Monthly Income:</span> <strong>{formatCurrency(results.effectiveIncome)}</strong></div>
                                 <div className="flex justify-between"><span>- Total OpEx:</span> <strong>{formatCurrency(results.operatingExpenses)}</strong></div>
                                 <div className="flex justify-between font-semibold"><span>= Monthly NOI:</span> <strong>{formatCurrency(results.noiMonthly)}</strong></div>
-                                <hr className="border-white/10 my-1"/>
+                                <hr className="border-gray-200 my-1"/>
                                 <div className="flex justify-between"><span>- Mortgage:</span> <strong>{formatCurrency(results.mortgagePayment)}</strong></div>
                                 <div className="flex justify-between font-semibold"><span>= Monthly Cash Flow:</span> <strong>{formatCurrency(results.cashFlowMonthly)}</strong></div>
-                                <hr className="border-white/10 my-1"/>
+                                <hr className="border-gray-200 my-1"/>
                                 <div className="flex justify-between"><span>Annual Cash Flow:</span> <strong>{formatCurrency(results.cashFlowAnnual)}</strong></div>
                             </div>
                         </Accordion>
                         
-                        <div className="flex flex-wrap gap-2 pt-4 border-t border-white/20">
+                        <div className="flex flex-wrap gap-2 pt-4 border-t border-gray-200">
                             <Button onClick={handleReset} variant="secondary" leftIcon={<ResetIcon />}>Reset</Button>
                             <Button onClick={handleCopy} variant="secondary" leftIcon={<CopyIcon />}>{copySuccess || 'Copy'}</Button>
                             <Button onClick={handleAnalyze} disabled={isAnalyzing || Object.keys(errors).length > 0} leftIcon={<SparkleIcon />}>Analyze</Button>

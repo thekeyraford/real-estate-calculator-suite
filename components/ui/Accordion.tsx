@@ -14,7 +14,7 @@ const Accordion: React.FC<AccordionProps> = ({ title, children, startOpen = fals
     return (
         <Card className="overflow-hidden">
             <button
-                className="w-full flex justify-between items-center p-4 text-left font-semibold text-lg hover:bg-white/5 transition-colors"
+                className="w-full flex justify-between items-center p-4 text-left font-semibold text-lg hover:bg-gray-100 transition-colors"
                 onClick={() => setIsOpen(!isOpen)}
                 aria-expanded={isOpen}
             >
